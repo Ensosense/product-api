@@ -97,6 +97,21 @@
 
 ## Testing
 
-To run tests, use the following command:
-```bash
-mvn test
+### JUnit Tests
+
+- **Unit Tests**: Verify individual components or methods in isolation to ensure they work as expected.
+- **Integration Tests**: Test the interaction between components, such as how the service layer interacts with the database or external systems. These include full service operations (CRUD operations). For these tests, the Testcontainers library is used to spin up and manage lightweight, disposable containers for dependencies like databases.
+
+
+## Deployment
+
+For deployment, `product-api` will be hosted on Amazon ECS using Fargate. ECS with Fargate was chosen for its scalability, ease of use, and the ability to manage containers without handling the underlying infrastructure.
+
+
+# Steps to deploy:
+
+1. **Create a Docker image** for the `product-api`.
+2. **Push the image to Amazon ECR**.
+3. **Create an ECS cluster** and configure it to use Fargate.
+4. **Deploy the service** on ECS, specifying the desired tasks and resources.
+
