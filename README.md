@@ -74,7 +74,7 @@
     - **Response**:
     ```json
     {
-      "pruduct_id": "7",
+      "product_id": "7",
       "category": "Product category",
       "price": 100.0,
       "title": "Product Title"
@@ -87,7 +87,7 @@
     ```json
     [
       {
-      "pruduct_id": "7",
+      "product_id": "7",
       "category": "Product category",
       "price": 100.0,
       "title": "Product Title"
