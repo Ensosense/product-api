@@ -21,4 +21,8 @@ public class ProductService {
   public List<ProductEntity> getAllProducts() {
     return productRepository.getAllProducts();
   }
+
+  public ProductEntity getProductById(String id) {
+    return productRepository.getProductById(id);
+  }
 }

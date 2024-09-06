@@ -6,40 +6,29 @@ import org.springframework.stereotype.Repository;
 import se.enso.productapi.domain.ProductEntity;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.Key;
 
 @Repository
 public class ProductRepository {
-  private final DynamoDbEnhancedClient dynamoDbEnhancedClient;
+  private final DynamoDbTable<ProductEntity> productTable;
 
   public ProductRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient) {
-    this.dynamoDbEnhancedClient = dynamoDbEnhancedClient;
+    this.productTable = dynamoDbEnhancedClient.table("Products", ProductEntity.getTableSchema());
   }
 
   public void save(ProductEntity productEntity) {
-    DynamoDbTable<ProductEntity>
-        productTable = dynamoDbEnhancedClient.table("Products", ProductEntity.getTableSchema());
     productTable.putItem(productEntity);
   }
 
-  public boolean isConnected() {
-    try {
-      DynamoDbTable<ProductEntity> productTable = dynamoDbEnhancedClient.table("Products", ProductEntity.getTableSchema());
-      // Perform a simple operation, like counting items in the table
-      productTable.describeTable();
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+  public List<ProductEntity> getAllProducts() {
+    List<ProductEntity> products = new ArrayList<>();
+    productTable.scan().items().forEach(products::add);
+    return products;
   }
 
-  public List<ProductEntity> getAllProducts() {
-    DynamoDbTable<ProductEntity> productTable = dynamoDbEnhancedClient.table("Products", ProductEntity.getTableSchema());
-    List<ProductEntity> products = new ArrayList<>();
-
-    // Use scan to get all items from the table
-    productTable.scan().items().forEach(products::add);
-
-    return products;
+  public ProductEntity getProductById(String id) {
+    Key key = Key.builder().partitionValue(id).build();
+    return productTable.getItem(r -> r.key(key));
   }
 }
 
