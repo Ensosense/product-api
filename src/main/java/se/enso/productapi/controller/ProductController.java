@@ -16,7 +16,7 @@ import se.enso.productapi.repository.ProductRepository;
 import se.enso.productapi.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
   private final ProductService productService;
@@ -38,10 +38,10 @@ public class ProductController {
     return productRepository.isConnected() ? "DynamoDB is connected!" : "DynamoDB connection failed!";
   }
 
-//  @GetMapping
-//  @ResponseStatus(HttpStatus.OK)
-//  public List<ProductResponse> getAllProducts(){
-//    return productService.getAllProducts();
-//  }
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public List<ProductEntity> getAllProducts(){
+    return productService.getAllProducts();
+  }
 
 }

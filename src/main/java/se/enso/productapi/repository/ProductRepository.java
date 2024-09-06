@@ -1,5 +1,7 @@
 package se.enso.productapi.repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 import se.enso.productapi.domain.ProductEntity;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
@@ -28,6 +30,16 @@ public class ProductRepository {
     } catch (Exception e) {
       return false;
     }
+  }
+
+  public List<ProductEntity> getAllProducts() {
+    DynamoDbTable<ProductEntity> productTable = dynamoDbEnhancedClient.table("Products", ProductEntity.getTableSchema());
+    List<ProductEntity> products = new ArrayList<>();
+
+    // Use scan to get all items from the table
+    productTable.scan().items().forEach(products::add);
+
+    return products;
   }
 }
 
