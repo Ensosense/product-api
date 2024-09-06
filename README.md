@@ -2,7 +2,14 @@
 
 ## Description
 
-`product-api` is a Spring Boot microservice designed to manage products in an e-commerce system. It provides endpoints for creating, editing, deleting, and retrieving products. This service interacts with AWS DynamoDB to store and manage product data.
+`product-api` is a Spring Boot microservice designed to manage products in an e-commerce system. It provides endpoints for creating, editing, deleting, and retrieving products. 
+
+## Integration
+Utilizes AWS DynamoDB for storing and managing product data.
+
+
+## Deployment
+Hosted on AWS ECS with Fargate.
 
 ## Features
 
