@@ -5,8 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copy the application's jar file into the container
-# COPY target/product-api-0.0.1-SNAPSHOT.jar app.jar
-COPY ./target/product-api-0.0.1-SNAPSHOT.jar app.jar
+COPY target/product-api-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port that your application will run on
 EXPOSE 80
