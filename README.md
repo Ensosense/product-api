@@ -9,7 +9,7 @@ Utilizes AWS DynamoDB for storing and managing product data.
 
 
 ## Deployment
-Hosted on AWS ECS with Fargate.
+Hosted on AWS ECS with Fargate. The deployment process is automated using GitHub Actions.
 
 ## Features
 
@@ -35,14 +35,14 @@ Hosted on AWS ECS with Fargate.
     cd product-api
     ```
 
-2. **Install Dependencies**:
+2. **Install Dependencies(local development)**:
     ```bash
     mvn install
     ```
 
 ## Configuration
 
-- **AWS DynamoDB Configuration**: Ensure that your AWS credentials are configured properly. You can set environment variables or use an AWS credentials file(used in this application).
+- **AWS DynamoDB Configuration**: Ensure that your AWS credentials are configured properly. For local development you can set environment variables or use an AWS credentials file(used in this application).
 
 ## Usage
 
@@ -112,13 +112,14 @@ Hosted on AWS ECS with Fargate.
 
 ## Deployment
 
-For deployment, `product-api` will be hosted on Amazon ECS using Fargate. ECS with Fargate was chosen for its scalability, ease of use, and the ability to manage containers without handling the underlying infrastructure.
+For deployment, `product-api` is hosted on Amazon ECS using Fargate. The deployment process is automated with GitHub Actions, and it triggers on pushes to the main branch.
 
+### CI/CD Pipeline
 
-# Steps to deploy:
+The CI/CD pipeline automates the following steps:
 
-1. **Create a Docker image** for the `product-api`.
-2. **Push the image to Amazon ECR**.
-3. **Create an ECS cluster** and configure it to use Fargate.
-4. **Deploy the service** on ECS, specifying the desired tasks and resources.
+- **Build**: The application is built using Maven.
+- **Docker Image**: A Docker image for the product-api is created and pushed to Amazon ECR.
+- **Update Task Definition**: The ECS task definition is updated with the new Docker image.
+- **Deploy**: The updated task definition is deployed to the ECS cluster.
 
