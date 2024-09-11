@@ -15,4 +15,3 @@ EXPOSE 80
 
 # Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
